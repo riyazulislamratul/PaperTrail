@@ -1,0 +1,6 @@
+{
+  "name": "PaperTrail",
+  "description": "Offline-first personal document intelligence and reminder app to scan, extract, organize, and track deadlines.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
