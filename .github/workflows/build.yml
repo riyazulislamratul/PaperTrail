@@ -12,8 +12,10 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
           
-      - name: Create .env
-        run: echo "GEMINI_API_KEY=MY_GEMINI_API_KEY" > .env
+      - name: Create missing .env and .env.example
+        run: |
+          echo "GEMINI_API_KEY=MY_GEMINI_API_KEY" > .env
+          echo "GEMINI_API_KEY=MY_GEMINI_API_KEY" > .env.example
         
       - name: Create missing Keystore
         run: keytool -genkey -v -keystore debug.keystore -storepass android -alias androiddebugkey -keypass android -keyalg RSA -keysize 2048 -validity 10000 -dname "C=US, O=Android, CN=Android Debug"
