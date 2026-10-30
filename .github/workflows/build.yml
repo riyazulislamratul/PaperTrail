@@ -7,7 +7,7 @@ jobs:
       - uses: actions/checkout@v4
       
       - name: Set up JDK 17
-        uses: actions/setup-java@v4
+        uses: actions/setup-java@v5
         with:
           java-version: '17'
           distribution: 'temurin'
@@ -15,11 +15,11 @@ jobs:
       - name: Create .env
         run: echo "GEMINI_API_KEY=MY_GEMINI_API_KEY" > .env
         
+      - name: Create missing Keystore
+        run: keytool -genkey -v -keystore debug.keystore -storepass android -alias androiddebugkey -keypass android -keyalg RSA -keysize 2048 -validity 10000 -dname "C=US, O=Android, CN=Android Debug"
+        
       - name: Setup Gradle Wrapper
         run: gradle wrapper
-        
-      - name: Make Gradlew Executable
-        run: chmod +x ./gradlew
         
       - name: Build Debug APK
         run: ./gradlew assembleDebug --stacktrace
