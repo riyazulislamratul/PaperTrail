@@ -20,11 +20,13 @@ jobs:
       - name: Create missing Keystore
         run: keytool -genkey -v -keystore debug.keystore -storepass android -alias androiddebugkey -keypass android -keyalg RSA -keysize 2048 -validity 10000 -dname "C=US, O=Android, CN=Android Debug"
         
-      - name: Setup Gradle
+      - name: Setup Gradle (Cache Disabled)
         uses: gradle/actions/setup-gradle@v3
+        with:
+          cache-disabled: true
         
       - name: Build Debug APK
-        run: gradle assembleDebug --stacktrace
+        run: gradle assembleDebug --no-build-cache --stacktrace
         
       - name: Upload APK
         uses: actions/upload-artifact@v4
